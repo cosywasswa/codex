@@ -1,8 +1,9 @@
 class Api::V1::CommentsController < ApplicationController
   def index
-    @video = Video.find(params[:id])
+    @user = current_user
+    @video = Video.find(params[:video_id])
     @comments = @video.comments.all
-    rende json: {
+    render json: {
       status: {
         code:200, message: "comments retrieved", data: @comments
       }
@@ -10,9 +11,9 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id])
+    @video = Video.find(params[:video_id])
     @comment = @video.comments.find(params[:id])
-    rende json: {
+    render json: {
       status: {
         code:200, message: "comments retrieved", data: @comment
       }

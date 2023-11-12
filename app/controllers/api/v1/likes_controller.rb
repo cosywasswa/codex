@@ -1,8 +1,8 @@
 class Api::V1::LikesController < ApplicationController
   def index
-    @video = Video.find(params[:id])
+    @video = Video.find(params[:video_id])
     @likes = @video.likes.all
-    rende json: {
+    render json: {
       status: {
         code:200, message: "likes retrieved", data: @likes
       }
