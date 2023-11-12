@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-         def jwt_payload
-          super
-        end
+         has_many :comments, dependent: :destroy
+         has_many :likes, dependent: :destroy
+         has_many :videos, dependent: :destroy
 end
