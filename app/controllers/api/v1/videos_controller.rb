@@ -1,10 +1,9 @@
 class Api::V1::VideosController < ApplicationController
-    before_action :set_video, only: [:show, :destroy]
 
     def index
         @videos = Video.all
         if@videos
-        render json: @videos
+        render json: @videos.as_json(methods: [:video_url])
         else
             render json: {
                 status: {error: @videos.errors.full_messages}
@@ -54,11 +53,8 @@ class Api::V1::VideosController < ApplicationController
     end
 
     private
-    def set_video
-        @video = Video.find(params[:id])
-    end
-
+    
     def video_params
-        params.require(:video).permit(:title, :description, :video_file, :user_id, :category)
+        params.require(:video).permit(:title, :description, :user_id, :category, :video_file)
     end
 end
