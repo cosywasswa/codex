@@ -3,7 +3,7 @@ class Api::V1::VideosController < ApplicationController
     def index
         @videos = Video.all
         if@videos
-        render json: @videos.as_json(methods: [:video_url])
+        render json: @videos.as_json(methods: [:video_url, :likes_counter])
         else
             render json: {
                 status: {error: @videos.errors.full_messages}

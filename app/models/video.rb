@@ -10,8 +10,9 @@ class Video < ApplicationRecord
 
     def video_url
         if video_file.attached?
-            # Rails.application.routes.url_helpers.rails_blob_url(video_file.attachment.blob)
-            polymorphic_url(video_file, disposition: "attachment", only_path: true)
+            Rails.application.routes.url_helpers.rails_blob_url(video_file)
+            # polymorphic_url(video_file, disposition: "attachment", only_path: true)
+            # Rails.application.routes.url_helpers.rails_storage_proxy_url(video_file)
           end
       end
 
